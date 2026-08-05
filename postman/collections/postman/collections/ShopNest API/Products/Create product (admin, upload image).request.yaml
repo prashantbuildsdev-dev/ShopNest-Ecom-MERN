@@ -1,0 +1,28 @@
+$kind: http-request
+url: "{{baseUrl}}/api/product"
+method: POST
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: formdata
+  content:
+    - type: text
+      key: name
+      value: Sample Product
+    - type: text
+      key: description
+      value: Product created with an uploaded image
+    - type: text
+      key: price
+      value: "499"
+    - type: text
+      key: category
+      value: Accessories
+    - type: text
+      key: stock
+      value: "20"
+    - type: file
+      key: image
+      src:
+        - 'C:/Users/prash/OneDrive/Pictures/image_1.jpg'
+order: 4000

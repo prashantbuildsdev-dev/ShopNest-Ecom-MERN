@@ -1,0 +1,11 @@
+# Dependencies and generated bundles
+node_modules/
+fronted/dist/
+
+# Local environment values and uploads
+backend/.env
+backend/uploads/
+
+# Local tooling files
+*.log
+.DS_Store

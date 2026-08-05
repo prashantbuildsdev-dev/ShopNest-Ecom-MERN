@@ -1,0 +1,11 @@
+$kind: collection
+name: ShopNest API
+description: ShopNest MERN API collection. Set productId and orderId after creating a product/order. Login or register automatically saves the JWT to {{token}}.
+variables:
+  baseUrl: http://localhost:5000
+  token: ""
+  productId: ""
+  orderId: ""
+  razorpayOrderId: ""
+  razorpayPaymentId: ""
+  razorpaySignature: ""

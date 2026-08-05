@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{baseUrl}}/api/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "email": "admin@shopnest.com",
+      "password": "password123"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200) {
+        pm.collectionVariables.set('token', pm.response.json().token);
+      }
+    language: text/javascript
+order: 2000

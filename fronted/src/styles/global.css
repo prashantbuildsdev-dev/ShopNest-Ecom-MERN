@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'outfit', sans-serif;
+}
+
+body {
+    background-color: #09090b;
+    color: #fafafa;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#root { min-height: 100vh; }
+
+.min-content {
+    min-height: 85vh;
+    padding: 40px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+/* premium buttoms */
+.btn {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px rgba(234, 88, 12, 0.3);
+    display: inline-block;
+    text-align: center;
+}
+
+.btn:hover {
+    transform: translate(-2px);
+    box-shadow: 0 6px 20px rgba(234, 88, 12, 0.5 );
+    filter: brightness(1.1);
+}
+
+.btn:active {
+    transform: translate(1px);
+}
+
+/* base heading */
+h1, h2, h3, h4 {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2.5rem;
+    background: linear-gradient(to right, #ffffff, #a1a1aa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* smooth fade in */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translate(10px);}
+    to {opacity: 1; transform: translate(0);}
+}
+
+/*custom scrollbar */
+::-webkit-scrollbar{
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thum:hover {
+    background: #3f3f46;
+}
+
+.app { 
+    min-height: 100vh;
+     display: flex;
+      flex-direction: column;
+     }
+
+
+main { 
+    flex: 1;
+ }
+
+
+.page-message { 
+    max-width: 800px;
+     margin: 3rem auto; 
+     padding: 1.5rem;
+    
+    }
+
+
+.footer { 
+    display: flex;
+     justify-content: space-between; 
+     gap: 1rem; 
+     padding: 1.25rem 50px; 
+     color: #a1a1aa;
+      border-top: 1px solid #27272a; 
+      background: #111113;
+     }
+
+
+.footer nav { 
+    display: flex;
+     gap: 1rem; 
+    }

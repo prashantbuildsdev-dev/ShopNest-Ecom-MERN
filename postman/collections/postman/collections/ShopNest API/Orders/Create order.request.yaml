@@ -1,0 +1,33 @@
+$kind: http-request
+url: "{{baseUrl}}/api/orders"
+method: POST
+headers:
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "items": [{
+        "ProductId": "{{productId}}",
+        "quantity": 1,
+        "price": 1799
+      }],
+      "totalAmount": 1799,
+      "address": {
+        "fullName": "Test User",
+        "street": "123 Main Street",
+        "city": "Mumbai",
+        "postalCode": "400001",
+        "country": "India"
+      },
+      "paymentId": "demo_payment_id"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 201) {
+        pm.collectionVariables.set('orderId', pm.response.json().order._id);
+      }
+    language: text/javascript
+order: 1000

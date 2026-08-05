@@ -1,0 +1,24 @@
+{
+  "name": "shopnest-full-stack",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "prashant"
+  ],
+  "license": "ISC",
+  "author": "prashant kumar",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "setup": "npm --prefix backend install && npm --prefix fronted install",
+    "dev:server": "npm --prefix backend run dev",
+    "dev:client": "npm --prefix fronted run dev",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "build": "npm --prefix fronted run build",
+    "start": "npm --prefix backend start",
+    "render-build": "npm run setup && npm run build"
+  },
+  "dependencies": {
+    "concurrently": "^10.0.3"
+  }
+}

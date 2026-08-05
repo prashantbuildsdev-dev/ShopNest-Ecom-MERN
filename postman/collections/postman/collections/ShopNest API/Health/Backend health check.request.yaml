@@ -1,0 +1,5 @@
+$kind: http-request
+description: Checks whether the ShopNest backend is running.
+url: "{{baseUrl}}/"
+method: GET
+order: 1000

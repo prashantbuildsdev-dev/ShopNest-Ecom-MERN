@@ -1,0 +1,25 @@
+$kind: http-request
+url: "{{baseUrl}}/api/product"
+method: POST
+headers:
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "Sample Headphones",
+      "description": "Wireless headphones for API testing",
+      "price": 1999,
+      "category": "Electronics",
+      "stock": 10,
+      "imageUrl": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 201) {
+        pm.collectionVariables.set('productId', pm.response.json()._id);
+      }
+    language: text/javascript
+order: 3000

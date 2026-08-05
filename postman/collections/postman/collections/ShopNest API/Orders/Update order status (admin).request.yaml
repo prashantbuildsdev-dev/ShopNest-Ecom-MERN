@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/api/orders/{{orderId}}/status"
+method: PUT
+headers:
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "status": "shipped"
+    }
+order: 4000

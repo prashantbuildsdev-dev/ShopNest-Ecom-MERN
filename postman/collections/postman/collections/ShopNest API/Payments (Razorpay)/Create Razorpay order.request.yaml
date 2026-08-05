@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{baseUrl}}/api/payment/order"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "amount": 1799
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200) {
+        pm.collectionVariables.set('razorpayOrderId', pm.response.json().id);
+      }
+    language: text/javascript
+order: 1000

@@ -1,0 +1,72 @@
+.navbar {
+  align-items: center;
+  background: #000;
+  border-bottom: 1px solid #151515;
+  display: flex;
+  height: 64px;
+  justify-content: space-between;
+  margin: 0 auto;
+  /* Keep the brand and navigation close to the screen edges on laptop widths. */
+  max-width: 1400px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.navbar-brand a {
+     align-items: center; 
+     display: flex; 
+     font-size: 21px; 
+     font-weight: 800; 
+     gap: 9px; 
+    }
+
+
+.navbar-brand {
+     margin-right: auto;
+     }
+
+
+.navbar-brand a::after {
+     color: #f97316; 
+     content: '.'; 
+     font-size: 25px; 
+    }
+
+
+.navbar-logo { 
+    border-radius: 5px; 
+    display: block; 
+    height: 25px !important; 
+    object-fit: cover; 
+    width: 25px !important;
+ }
+
+
+.navbar-links { 
+    align-items: center;
+     color: #b0b0b0; 
+     display: flex; 
+     font-size: 12px; 
+     font-weight: 500; 
+     gap: 34px; 
+     margin-left: auto; 
+    }
+
+
+.navbar-links a:hover {
+     color: #fff;
+     }
+
+
+.btn-logout { 
+    background: transparent; 
+    border: 0; 
+    color: #b0b0b0; 
+    cursor: pointer; 
+    font: inherit; 
+}
+
+@media (max-width: 520px) {
+  .navbar { padding: 0 16px; }
+  .navbar-links { gap: 13px; }
+}

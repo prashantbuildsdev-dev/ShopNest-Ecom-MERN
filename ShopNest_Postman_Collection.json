@@ -1,0 +1,150 @@
+{
+  "info": {
+    "_postman_id": "b7500b1c-8073-44d4-9b12-4dfd18ded204",
+    "name": "ShopNest API",
+    "description": "ShopNest MERN API collection. Set productId and orderId after creating a product/order. Login or register automatically saves the JWT to {{token}}.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "token", "value": "" },
+    { "key": "productId", "value": "" },
+    { "key": "orderId", "value": "" },
+    { "key": "razorpayOrderId", "value": "" },
+    { "key": "razorpayPaymentId", "value": "" },
+    { "key": "razorpaySignature", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Backend health check",
+          "request": { "method": "GET", "url": "{{baseUrl}}/", "description": "Checks whether the ShopNest backend is running." }
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register user",
+          "event": [{ "listen": "test", "script": { "exec": ["if (pm.response.code === 201) {", "  pm.collectionVariables.set('token', pm.response.json().token);", "}"], "type": "text/javascript" } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"testuser@example.com\",\n  \"password\": \"password123\"\n}" },
+            "url": "{{baseUrl}}/api/auth/register"
+          }
+        },
+        {
+          "name": "Login",
+          "event": [{ "listen": "test", "script": { "exec": ["if (pm.response.code === 200) {", "  pm.collectionVariables.set('token', pm.response.json().token);", "}"], "type": "text/javascript" } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@shopnest.com\",\n  \"password\": \"password123\"\n}" },
+            "url": "{{baseUrl}}/api/auth/login"
+          }
+        },
+        {
+          "name": "Get all users (admin)",
+          "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/auth/users" }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get all products",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/product" }
+        },
+        {
+          "name": "Get product by ID",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/product/{{productId}}" }
+        },
+        {
+          "name": "Create product (admin, image URL)",
+          "event": [{ "listen": "test", "script": { "exec": ["if (pm.response.code === 201) {", "  pm.collectionVariables.set('productId', pm.response.json()._id);", "}"], "type": "text/javascript" } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Sample Headphones\",\n  \"description\": \"Wireless headphones for API testing\",\n  \"price\": 1999,\n  \"category\": \"Electronics\",\n  \"stock\": 10,\n  \"imageUrl\": \"https://images.unsplash.com/photo-1505740420928-5e560c06d30e\"\n}" },
+            "url": "{{baseUrl}}/api/product"
+          }
+        },
+        {
+          "name": "Create product (admin, upload image)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": { "mode": "formdata", "formdata": [
+              { "key": "name", "value": "Sample Product", "type": "text" },
+              { "key": "description", "value": "Product created with an uploaded image", "type": "text" },
+              { "key": "price", "value": "499", "type": "text" },
+              { "key": "category", "value": "Accessories", "type": "text" },
+              { "key": "stock", "value": "20", "type": "text" },
+              { "key": "image", "type": "file", "src": [] }
+            ] },
+            "url": "{{baseUrl}}/api/product"
+          }
+        },
+        {
+          "name": "Update product (admin)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"price\": 1799,\n  \"stock\": 15\n}" },
+            "url": "{{baseUrl}}/api/product/{{productId}}"
+          }
+        },
+        {
+          "name": "Delete product (admin)",
+          "request": { "method": "DELETE", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/product/{{productId}}" }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Create order",
+          "event": [{ "listen": "test", "script": { "exec": ["if (pm.response.code === 201) {", "  pm.collectionVariables.set('orderId', pm.response.json().order._id);", "}"], "type": "text/javascript" } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"items\": [{\n    \"ProductId\": \"{{productId}}\",\n    \"quantity\": 1,\n    \"price\": 1799\n  }],\n  \"totalAmount\": 1799,\n  \"address\": {\n    \"fullName\": \"Test User\",\n    \"street\": \"123 Main Street\",\n    \"city\": \"Mumbai\",\n    \"postalCode\": \"400001\",\n    \"country\": \"India\"\n  },\n  \"paymentId\": \"demo_payment_id\"\n}" },
+            "url": "{{baseUrl}}/api/orders"
+          }
+        },
+        { "name": "My orders", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/orders/myOrders" } },
+        { "name": "Get all orders (admin)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/orders" } },
+        {
+          "name": "Update order status (admin)",
+          "request": { "method": "PUT", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"status\": \"shipped\"\n}" }, "url": "{{baseUrl}}/api/orders/{{orderId}}/status" }
+        }
+      ]
+    },
+    {
+      "name": "Payments (Razorpay)",
+      "item": [
+        {
+          "name": "Create Razorpay order",
+          "event": [{ "listen": "test", "script": { "exec": ["if (pm.response.code === 200) {", "  pm.collectionVariables.set('razorpayOrderId', pm.response.json().id);", "}"], "type": "text/javascript" } }],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"amount\": 1799\n}" }, "url": "{{baseUrl}}/api/payment/order" }
+        },
+        {
+          "name": "Verify Razorpay payment",
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"razorpay_order_id\": \"{{razorpayOrderId}}\",\n  \"razorpay_payment_id\": \"{{razorpayPaymentId}}\",\n  \"razorpay_signature\": \"{{razorpaySignature}}\"\n}" }, "url": "{{baseUrl}}/api/payment/verify" }
+        }
+      ]
+    },
+    {
+      "name": "Admin Analytics",
+      "item": [
+        { "name": "Get dashboard statistics (admin)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/analytics" } }
+      ]
+    }
+  ]
+}

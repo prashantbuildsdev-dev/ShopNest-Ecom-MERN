@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/api/auth/register"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "Test User",
+      "email": "testuser@example.com",
+      "password": "password123"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 201) {
+        pm.collectionVariables.set('token', pm.response.json().token);
+      }
+    language: text/javascript
+order: 1000
