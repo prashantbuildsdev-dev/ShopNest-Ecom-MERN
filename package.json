@@ -10,7 +10,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "setup": "npm --prefix backend install && npm --prefix fronted install",
+    "setup": "npm --prefix backend install && npm --prefix fronted install --include=dev",
     "install-all": "npm run setup",
     "dev:server": "npm --prefix backend run dev",
     "dev:client": "npm --prefix fronted run dev",
