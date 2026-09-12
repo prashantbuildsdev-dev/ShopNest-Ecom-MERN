@@ -1,14 +1,8 @@
 {
   "name": "shopnest-full-stack",
   "version": "1.0.0",
-  "description": "",
-  "keywords": [
-    "prashant"
-  ],
-  "license": "ISC",
+  "description": "Full-Stack MERN E-Commerce App",
   "author": "prashant kumar",
-  "type": "commonjs",
-  "main": "index.js",
   "scripts": {
     "setup": "npm --prefix backend install && npm --prefix fronted install --include=dev",
     "install-all": "npm run setup",
@@ -17,6 +11,7 @@
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "build": "npm --prefix fronted run build",
     "start": "npm --prefix backend start",
+    "seed": "npm --prefix backend run seed",
     "render-build": "npm run setup && npm run build"
   },
   "dependencies": {
