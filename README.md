@@ -2,6 +2,11 @@
 
 ShopNest is a MERN e-commerce application with customer accounts, a shopping cart, Razorpay checkout, product management, order tracking, and an admin dashboard.
 
+## 🚀 Live Demo
+
+[ShopNest Live Demo](https://shopnest-ecom-mern-addh.onrender.com)
+
+
 ## Local setup
 
 1. Copy `backend/.env.example` to `backend/.env` and fill in at least `MONGO_URI` and a long random `JWT_SECRET`.
