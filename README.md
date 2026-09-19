@@ -7,32 +7,89 @@ ShopNest is a MERN e-commerce application with customer accounts, a shopping car
 [ShopNest Live Demo](https://shopnest-ecom-mern-addh.onrender.com)
 
 
-## Local setup
+## ✨ Features
 
-1. Copy `backend/.env.example` to `backend/.env` and fill in at least `MONGO_URI` and a long random `JWT_SECRET`.
-2. Install dependencies with `npm.cmd run setup` on Windows, or `npm run setup` elsewhere.
-3. Start the app with `npm.cmd run dev` on Windows, or `npm run dev` elsewhere.
-4. Open `http://localhost:5173`.
+### 👤 User Features
 
-The backend runs on port 5000. Vite proxies `/api` and `/uploads` requests during development.
+* User registration and login
+* JWT-based authentication
+* Protected user routes
+* Browse product catalogue
+* View product details
+* Add and remove products from cart
+* Checkout and order placement
+* Razorpay payment integration
+* Customer profile
+* Order history
+* Order tracking
 
-## Environment variables
+### 🛠️ Admin Features
 
-Required:
+* Protected admin dashboard
+* Admin-only authorization
+* Revenue, product, order, and user statistics
+* Create, update, and delete products
+* Product image upload
+* Cloudinary image storage
+* Order status management
+* User listing and management
 
-- `MONGO_URI` – MongoDB / Atlas connection string.
-- `JWT_SECRET` – a long, private random value.
+### 🔐 Security & Backend
 
-For production image uploads, set all Cloudinary variables. Local uploads are suitable only for development because most hosts use ephemeral storage.
+* JWT authentication
+* Password hashing with bcrypt
+* Role-based authorization
+* Protected REST APIs
+* MongoDB database
+* Mongoose models
+* Express middleware
+* Environment variable configuration
 
-Razorpay remains disabled until both `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` are provided. The app will show a clear configuration message instead of accepting an unpaid order.
+### 💳 Integrations
 
-## Deploy as one Node service
+* Razorpay for online payments
+* Cloudinary for image storage
+* Multer for image uploads
+* Nodemailer for email functionality
+* Postman collection for API testing
 
-The Express server serves the Vite build when `NODE_ENV=production`.
+---
 
-- Build command: `npm run render-build`
-- Start command: `npm start`
-- Set `NODE_ENV=production` and add the required environment variables in your host dashboard.
+## 🖥️ Tech Stack
 
-Set `FRONTEND_URL` only when the frontend is hosted separately. Do not commit `backend/.env` or payment credentials.
+### Frontend
+
+* React 19
+* Vite
+* React Router
+* Redux Toolkit
+* Axios
+
+### Backend
+
+* Node.js
+* Express 5
+* MongoDB
+* Mongoose
+
+### Authentication
+
+* JSON Web Tokens (JWT)
+* bcrypt
+
+### Payments
+
+* Razorpay
+
+### Image Uploads
+
+* Cloudinary
+* Multer
+
+### Email
+
+* Nodemailer
+
+### API Testing
+
+* Postman
