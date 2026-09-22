@@ -84,6 +84,7 @@ ShopNest is a MERN e-commerce application with customer accounts, a shopping car
 ### Image Uploads
 
 * Cloudinary
+
 * Multer
 
 ### Email
@@ -93,3 +94,10 @@ ShopNest is a MERN e-commerce application with customer accounts, a shopping car
 ### API Testing
 
 * Postman
+
+
+Athor: 
+Prashant Kumar
+B.Tech CSE Student | Web Development |MERN Stack Development & DSA Learner
+
+Connect With Me 
